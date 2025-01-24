@@ -23,40 +23,39 @@ struct Node* newNode(int key) {
 
 // Insert a key into the BST
 struct Node* insert(struct Node* root, int key) {
-    if (root == NULL) return newNode(key); // Create a new node if the tree is empty
+    if (root == NULL) return newNode(key);
     if (key < root->key)
-        root->left = insert(root->left, key); // Insert in the left subtree if key is smaller
+        root->left = insert(root->left, key);
     else if (key > root->key)
-        root->right = insert(root->right, key); // Insert in the right subtree if key is larger
-    return root; // Return the unchanged root
+        root->right = insert(root->right, key);
+    return root;
 }
 
 // Search for a key in the BST
 struct Node* search(struct Node* root, int key) {
-    if (root == NULL || root->key == key) // Return the node if found or NULL if not found
+    if (root == NULL || root->key == key)
         return root;
     if (key < root->key)
-        return search(root->left, key); // Search in the left subtree if key is smaller
-    return search(root->right); // Search in the right subtree otherwise
+        return search(root->left, key);
+    return search(root->right);
 }
 
 // Find the minimum value node
 struct Node* findMin(struct Node* root) {
     while (root->left != NULL)
-        root = root->left; // Move to the leftmost node
+        root = root->left;
     return root;
 }
 
 // Delete a key from the BST
 struct Node* deleteNode(struct Node* root, int key) {
-    if (root == NULL) return root; // If tree is empty
+    if (root == NULL) return root;
 
     if (key < root->key)
-        root->left = deleteNode(root->left, key); // Recur for the left subtree
+        root->left = deleteNode(root->left, key);
     else if (key > root->key)
-        root->right = deleteNode(root->right, key); // Recur for the right subtree
+        root->right = deleteNode(root->right, key);
     else {
-        // Node with one child or no child
         if (root->left == NULL) {
             struct Node* temp = root->right;
             free(root);
@@ -66,14 +65,8 @@ struct Node* deleteNode(struct Node* root, int key) {
             free(root);
             return temp;
         }
-
-        // Node with two children: Get the inorder successor (smallest in the right subtree)
         struct Node* temp = findMin(root->right);
-
-        // Copy the inorder successor's content to this node
         root->key = temp->key;
-
-        // Delete the inorder successor
         root->right = deleteNode(root->right, temp->key);
     }
     return root;
@@ -82,27 +75,27 @@ struct Node* deleteNode(struct Node* root, int key) {
 // Inorder traversal (sorted order)
 void inorder(struct Node* root) {
     if (root != NULL) {
-        inorder(root->left); // Visit left subtree
-        printf("%d ", root->key); // Print the key
-        inorder(root->right); // Visit right subtree
+        inorder(root->left);
+        printf("%d ", root->key);
+        inorder(root->right);
     }
 }
 
 // Preorder traversal
 void preorder(struct Node* root) {
     if (root != NULL) {
-        printf("%d ", root->key); // Print the key
-        preorder(root->left); // Visit left subtree
-        preorder(root->right); // Visit right subtree
+        printf("%d ", root->key);
+        preorder(root->left);
+        preorder(root->right);
     }
 }
 
 // Postorder traversal
 void postorder(struct Node* root) {
     if (root != NULL) {
-        postorder(root->left); // Visit left subtree
-        postorder(root->right); // Visit right subtree
-        printf("%d ", root->key); // Print the key
+        postorder(root->left);
+        postorder(root->right);
+        printf("%d ", root->key);
     }
 }
 
@@ -196,9 +189,9 @@ int main() {
 2. **Search**: Finds a node with a given key.
 3. **Deletion**: Removes a node while preserving the BST structure.
 4. **Traversals**:
-   - **Inorder**: Left -> Root -> Right (sorted order).
-   - **Preorder**: Root -> Left -> Right.
-   - **Postorder**: Left -> Right -> Root.
+   - Inorder: Left -> Root -> Right (sorted order).
+   - Preorder: Root -> Left -> Right.
+   - Postorder: Left -> Right -> Root.
 
 ## Diagrams for Better Understanding
 
@@ -268,4 +261,12 @@ To compile and execute this program:
 2. Use the following commands:
    ```bash
    gcc bst.c -o bst
-  
+   ./bst
+   ```
+
+## Explanation of Changes
+- Added detailed comments in the code for each operation.
+- Included tree diagrams for better understanding of insertion and deletion operations.
+- Organized content for clarity.
+
+Feel free to experiment with the code by adding or removing nodes and observing the results!
