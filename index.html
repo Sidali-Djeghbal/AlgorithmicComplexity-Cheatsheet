@@ -9,16 +9,11 @@
     <div id="content"></div>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
-        fetch('./README.md')
-    .then(response => response.text())
-    .then(md => {
-        document.getElementById('content').innerHTML = marked(md);
-    })
-    .catch(err => {
-        console.error('Failed to load README.md:', err);
-        document.getElementById('content').innerHTML = 'Failed to load README.md';
-    });
-
+        fetch('README.md')
+            .then(response => response.text())
+            .then(md => {
+                document.getElementById('content').innerHTML = marked(md);
+            });
     </script>
 </body>
 </html>
