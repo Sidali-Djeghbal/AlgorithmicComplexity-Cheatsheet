@@ -37,7 +37,7 @@ struct Node* search(struct Node* root, int key) {
         return root;
     if (key < root->key)
         return search(root->left, key);
-    return search(root->right, key);  // Fixed: Added the missing 'key' argument
+    return search(root->right, key);  
 }
 
 // Find the minimum value node
